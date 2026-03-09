@@ -22,19 +22,14 @@ export function useEntries(filters?: EntryFilters): UseEntriesResult {
     setError(null);
 
     getEntries(filters)
-      .then((data) => {
-        if (!cancelled) setEntries(data);
+      .then((data) => { if (!cancelled) setEntries(data); })
+      .catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : 'Unknown error';
+        if (!cancelled) setError(message);
       })
-      .catch((err: Error) => {
-        if (!cancelled) setError(err.message);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+      .finally(() => { if (!cancelled) setLoading(false); });
 
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [filters?.year, filters?.month, tick]);
 
   return {
