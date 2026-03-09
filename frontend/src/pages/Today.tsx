@@ -8,6 +8,10 @@ function toISODate(d: Date): string {
   return d.toISOString().slice(0, 10);
 }
 
+function formatHeadingDate(d: Date): string {
+  return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+}
+
 export default function Today() {
   const today = toISODate(new Date());
   const now = new Date();
@@ -55,13 +59,7 @@ export default function Today() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>
-        {new Date().toLocaleDateString('en-GB', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'long',
-        })}
-      </h1>
+      <h1 className={styles.heading}>{formatHeadingDate(new Date())}</h1>
       <p className={styles.prompt}>What are you grateful for today?</p>
 
       {showForm ? (

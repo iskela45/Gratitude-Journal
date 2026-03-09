@@ -11,6 +11,10 @@ const MONTHS = [
 const currentYear = new Date().getFullYear();
 const YEARS = Array.from({ length: currentYear - 2019 }, (_, i) => 2020 + i);
 
+function formatEntryDate(dateStr: string): string {
+  return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long' });
+}
+
 export default function Journal() {
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
@@ -62,13 +66,7 @@ export default function Journal() {
         {entries.map((entry) => (
           <li key={entry.id} className={styles.card}>
             <div className={styles.cardHeader}>
-              <time className={styles.date}>
-                {new Date(entry.date + 'T00:00:00').toLocaleDateString('en-GB', {
-                  weekday: 'short',
-                  day: 'numeric',
-                  month: 'long',
-                })}
-              </time>
+              <time className={styles.date}>{formatEntryDate(entry.date)}</time>
               <button
                 className={styles.deleteButton}
                 onClick={() => handleDelete(entry.id, entry.date)}
