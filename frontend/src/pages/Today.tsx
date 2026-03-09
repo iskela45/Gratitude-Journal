@@ -28,7 +28,7 @@ export default function Today() {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 
-  // When entry loads, pre-fill the textarea if we enter edit mode
+  // When entry loads, pre-fill the text area if entering edit mode
   useEffect(() => {
     if (existing) setContent(existing.content);
   }, [existing?.id]);
