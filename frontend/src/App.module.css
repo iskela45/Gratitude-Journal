@@ -5,16 +5,23 @@
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
   height: 56px;
   background: #fff;
   border-bottom: 1px solid #e8e8e4;
   position: sticky;
   top: 0;
   z-index: 10;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
 }
 
 .logo {
@@ -26,6 +33,7 @@
 .nav {
   display: flex;
   gap: 0.25rem;
+  /* background-color: green; */
 }
 
 .nav a {

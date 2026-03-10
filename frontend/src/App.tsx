@@ -9,18 +9,20 @@ export default function App() {
     <BrowserRouter>
       <div className={styles.layout}>
         <header className={styles.header}>
-          <span className={styles.logo}>Gratitude Journal</span>
-          <nav className={styles.nav}>
-            <NavLink to="/" end className={({ isActive }) => isActive ? styles.active : undefined}>
-              Today
-            </NavLink>
-            <NavLink to="/journal" className={({ isActive }) => isActive ? styles.active : undefined}>
-              Journal
-            </NavLink>
-            <NavLink to="/stats" className={({ isActive }) => isActive ? styles.active : undefined}>
-              Stats
-            </NavLink>
-          </nav>
+          <div className={styles.headerInner}>
+            <span className={styles.logo}>Gratitude Journal</span>
+            <nav className={styles.nav}>
+              <NavLink to="/" end className={({ isActive }) => isActive ? styles.active : undefined}>
+                Today
+              </NavLink>
+              <NavLink to="/journal" className={({ isActive }) => isActive ? styles.active : undefined}>
+                Journal
+              </NavLink>
+              <NavLink to="/stats" className={({ isActive }) => isActive ? styles.active : undefined}>
+                Stats
+              </NavLink>
+            </nav>
+          </div>
         </header>
         <main className={styles.main}>
           <Routes>
