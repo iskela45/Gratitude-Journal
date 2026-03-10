@@ -58,7 +58,7 @@ export default function Stats() {
               contentStyle={{ border: '1px solid #e8e8e4', borderRadius: 6, fontSize: 13 }}
               cursor={{ fill: '#f0f0ec' }}
             />
-            <Bar dataKey="entries" fill="#1a1a1a" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="entries" fill="#fd836f" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

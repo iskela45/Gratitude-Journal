@@ -6,8 +6,7 @@
 
 .header {
   height: 56px;
-  background: #fff;
-  border-bottom: 1px solid #e8e8e4;
+  background: #fd836f;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -28,30 +27,29 @@
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: -0.01em;
+  color: #fff;
 }
 
 .nav {
   display: flex;
   gap: 0.25rem;
-  /* background-color: green; */
 }
 
 .nav a {
   padding: 0.4rem 0.85rem;
-  border-radius: 6px;
+  padding-bottom: calc(0.4rem - 2px);
+  border-bottom: 2px solid transparent;
   font-size: 0.9rem;
-  color: #555;
-  transition: background 0.15s, color 0.15s;
+  color: #fff;
+  transition: border-color 0.15s;
 }
 
 .nav a:hover {
-  background: #f0f0ec;
-  color: #1a1a1a;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
 }
 
 .nav a.active {
-  background: #1a1a1a;
-  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.9);
 }
 
 .main {
