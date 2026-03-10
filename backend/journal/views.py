@@ -32,6 +32,7 @@ def stats(request):
     entries = Entry.objects.order_by('date')
     dates = list(entries.values_list('date', flat=True))
 
+    # Group entries by month and count each group
     per_month = (
         Entry.objects
         .annotate(month=TruncMonth('date'))
