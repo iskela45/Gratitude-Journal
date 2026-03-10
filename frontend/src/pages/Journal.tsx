@@ -19,16 +19,20 @@ export default function Journal() {
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth() + 1);
+  const [confirmId, setConfirmId] = useState<number | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const { entries, loading, error, refetch } = useEntries({ year, month });
 
-  async function handleDelete(id: number, date: string) {
-    if (!confirm(`Delete entry for ${date}?`)) return;
+  async function handleDelete(id: number) {
+    setDeleteError(null);
     try {
       await deleteEntry(id);
+      setConfirmId(null);
       refetch();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Failed to delete entry');
+      setDeleteError(err instanceof Error ? err.message : 'Failed to delete entry');
+      setConfirmId(null);
     }
   }
 
@@ -57,6 +61,7 @@ export default function Journal() {
 
       {loading && <p className={styles.status}>Loading…</p>}
       {error && <p className={styles.error}>Error: {error}</p>}
+      {deleteError && <p className={styles.error}>{deleteError}</p>}
 
       {!loading && !error && entries.length === 0 && (
         <p className={styles.empty}>No entries for {MONTHS[month - 1]} {year}.</p>
@@ -67,12 +72,14 @@ export default function Journal() {
           <li key={entry.id} className={styles.card}>
             <div className={styles.cardHeader}>
               <time className={styles.date}>{formatEntryDate(entry.date)}</time>
-              <button
-                className={styles.deleteButton}
-                onClick={() => handleDelete(entry.id, entry.date)}
-              >
-                Delete
-              </button>
+              {confirmId === entry.id ? (
+                <div className={styles.confirmActions}>
+                  <button className={styles.confirmButton} onClick={() => handleDelete(entry.id)}>Confirm?</button>
+                  <button className={styles.cancelDeleteButton} onClick={() => setConfirmId(null)}>Cancel</button>
+                </div>
+              ) : (
+                <button className={styles.deleteButton} onClick={() => setConfirmId(entry.id)}>Delete</button>
+              )}
             </div>
             <p className={styles.content}>{entry.content}</p>
           </li>

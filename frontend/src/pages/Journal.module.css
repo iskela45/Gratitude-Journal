@@ -87,3 +87,38 @@
 .deleteButton:hover {
   background: #fdf0ee;
 }
+
+.confirmActions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.confirmButton {
+  padding: 0.3rem 0.75rem;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.confirmButton:hover {
+  background: #c0392b;
+}
+
+.cancelDeleteButton {
+  padding: 0.3rem 0.75rem;
+  background: transparent;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.cancelDeleteButton:hover {
+  background: #f0f0ec;
+}
