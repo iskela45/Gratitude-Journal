@@ -1,0 +1,17 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Local env (contains machine-specific config)
+frontend/.env
+
+# Editor
+.vscode/
+.idea/
+*.swp
