@@ -4,7 +4,7 @@ from django.db import models
 class Entry(models.Model):
     # unique=True ensures only one entry per day
     date = models.DateField(unique=True)
-    content = models.TextField()
+    content = models.TextField(max_length=2000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
