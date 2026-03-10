@@ -1,0 +1,35 @@
+{
+  "logo": "Gratitude Journal",
+  "nav": {
+    "today": "Today",
+    "journal": "Journal",
+    "stats": "Stats"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Error: {{message}}",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving…",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm?"
+  },
+  "today": {
+    "prompt": "What are you grateful for today?",
+    "placeholder": "Write a few things you're grateful for…",
+    "saveError": "Something went wrong"
+  },
+  "journal": {
+    "empty": "No entries for {{month}} {{year}}.",
+    "deleteError": "Failed to delete entry"
+  },
+  "stats": {
+    "empty": "No entries yet — write your first one on the Today page.",
+    "currentStreak": "Current streak",
+    "longestStreak": "Longest streak",
+    "totalEntries": "Total entries",
+    "entriesPerMonth": "Entries per month",
+    "entries": "entries"
+  }
+}

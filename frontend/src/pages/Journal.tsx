@@ -1,21 +1,27 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { deleteEntry } from '../api/client';
 import { useEntries } from '../hooks/useEntries';
 import styles from './Journal.module.css';
 
-const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
-
 const currentYear = new Date().getFullYear();
 const YEARS = Array.from({ length: currentYear - 2019 }, (_, i) => 2020 + i);
 
-function formatEntryDate(dateStr: string): string {
-  return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long' });
+function getMonthNames(locale: string): string[] {
+  return Array.from({ length: 12 }, (_, i) =>
+    new Date(2024, i).toLocaleDateString(locale, { month: 'long' })
+  );
+}
+
+function formatEntryDate(dateStr: string, locale: string): string {
+  return new Date(dateStr + 'T00:00:00').toLocaleDateString(locale, { weekday: 'short', day: 'numeric', month: 'long' });
 }
 
 export default function Journal() {
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language === 'fi' ? 'fi-FI' : 'en-GB';
+  const MONTHS = getMonthNames(locale);
+
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth() + 1);
@@ -31,7 +37,7 @@ export default function Journal() {
       setConfirmId(null);
       refetch();
     } catch (err) {
-      setDeleteError(err instanceof Error ? err.message : 'Failed to delete entry');
+      setDeleteError(err instanceof Error ? err.message : t('journal.deleteError'));
       setConfirmId(null);
     }
   }
@@ -45,7 +51,7 @@ export default function Journal() {
           className={styles.select}
         >
           {MONTHS.map((name, i) => (
-            <option key={name} value={i + 1}>{name}</option>
+            <option key={i} value={i + 1}>{name}</option>
           ))}
         </select>
         <select
@@ -59,26 +65,26 @@ export default function Journal() {
         </select>
       </div>
 
-      {loading && <p className={styles.status}>Loading…</p>}
-      {error && <p className={styles.error}>Error: {error}</p>}
+      {loading && <p className={styles.status}>{t('common.loading')}</p>}
+      {error && <p className={styles.error}>{t('common.error', { message: error })}</p>}
       {deleteError && <p className={styles.error}>{deleteError}</p>}
 
       {!loading && !error && entries.length === 0 && (
-        <p className={styles.empty}>No entries for {MONTHS[month - 1]} {year}.</p>
+        <p className={styles.empty}>{t('journal.empty', { month: MONTHS[month - 1], year })}</p>
       )}
 
       <ul className={styles.list}>
         {entries.map((entry) => (
           <li key={entry.id} className={styles.card}>
             <div className={styles.cardHeader}>
-              <time className={styles.date}>{formatEntryDate(entry.date)}</time>
+              <time className={styles.date}>{formatEntryDate(entry.date, locale)}</time>
               {confirmId === entry.id ? (
                 <div className={styles.confirmActions}>
-                  <button className={styles.confirmButton} onClick={() => handleDelete(entry.id)}>Confirm?</button>
-                  <button className={styles.cancelDeleteButton} onClick={() => setConfirmId(null)}>Cancel</button>
+                  <button className={styles.confirmButton} onClick={() => handleDelete(entry.id)}>{t('common.confirm')}</button>
+                  <button className={styles.cancelDeleteButton} onClick={() => setConfirmId(null)}>{t('common.cancel')}</button>
                 </div>
               ) : (
-                <button className={styles.deleteButton} onClick={() => setConfirmId(entry.id)}>Delete</button>
+                <button className={styles.deleteButton} onClick={() => setConfirmId(entry.id)}>{t('common.delete')}</button>
               )}
             </div>
             <p className={styles.content}>{entry.content}</p>

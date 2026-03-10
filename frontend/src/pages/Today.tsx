@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createEntry, updateEntry } from '../api/client';
 import { useEntries } from '../hooks/useEntries';
 import type { Entry } from '../types';
@@ -11,11 +12,14 @@ function toISODate(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-function formatHeadingDate(d: Date): string {
-  return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+function formatHeadingDate(d: Date, locale: string): string {
+  return d.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
 export default function Today() {
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language === 'fi' ? 'fi-FI' : 'en-GB';
+
   const today = toISODate(new Date());
   const now = new Date();
 
@@ -49,21 +53,21 @@ export default function Today() {
       setEditing(false);
       refetch();
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Something went wrong');
+      setSaveError(err instanceof Error ? err.message : t('today.saveError'));
     } finally {
       setSaving(false);
     }
   }
 
-  if (loading) return <p className={styles.status}>Loading…</p>;
-  if (error) return <p className={styles.error}>Error: {error}</p>;
+  if (loading) return <p className={styles.status}>{t('common.loading')}</p>;
+  if (error) return <p className={styles.error}>{t('common.error', { message: error })}</p>;
 
   const showForm = !existing || editing;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>{formatHeadingDate(new Date())}</h1>
-      <p className={styles.prompt}>What are you grateful for today?</p>
+      <h1 className={styles.heading}>{formatHeadingDate(new Date(), locale)}</h1>
+      <p className={styles.prompt}>{t('today.prompt')}</p>
 
       {showForm ? (
         <div className={styles.form}>
@@ -71,7 +75,7 @@ export default function Today() {
             className={styles.textarea}
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Write a few things you're grateful for…"
+            placeholder={t('today.placeholder')}
             rows={6}
             autoFocus
           />
@@ -85,7 +89,7 @@ export default function Today() {
                   setContent(existing.content);
                 }}
               >
-                Cancel
+                {t('common.cancel')}
               </button>
             )}
             <button
@@ -93,7 +97,7 @@ export default function Today() {
               onClick={handleSave}
               disabled={saving || !content.trim()}
             >
-              {saving ? 'Saving…' : 'Save'}
+              {saving ? t('common.saving') : t('common.save')}
             </button>
           </div>
         </div>
@@ -101,7 +105,7 @@ export default function Today() {
         <div className={styles.entry}>
           <p className={styles.entryContent}>{existing.content}</p>
           <button className={styles.editButton} onClick={() => setEditing(true)}>
-            Edit
+            {t('common.edit')}
           </button>
         </div>
       )}

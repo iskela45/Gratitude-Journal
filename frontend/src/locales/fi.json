@@ -1,0 +1,35 @@
+{
+  "logo": "Kiitollisuuspäiväkirja",
+  "nav": {
+    "today": "Tänään",
+    "journal": "Päiväkirja",
+    "stats": "Tilastot"
+  },
+  "common": {
+    "loading": "Ladataan…",
+    "error": "Virhe: {{message}}",
+    "cancel": "Peruuta",
+    "save": "Tallenna",
+    "saving": "Tallennetaan…",
+    "edit": "Muokkaa",
+    "delete": "Poista",
+    "confirm": "Vahvista?"
+  },
+  "today": {
+    "prompt": "Mistä olet tänään kiitollinen?",
+    "placeholder": "Kirjoita muutama asia, joista olet kiitollinen…",
+    "saveError": "Jokin meni pieleen"
+  },
+  "journal": {
+    "empty": "Ei merkintöjä: {{month}} {{year}}.",
+    "deleteError": "Merkinnän poistaminen epäonnistui"
+  },
+  "stats": {
+    "empty": "Ei vielä merkintöjä — kirjoita ensimmäinen Tänään-sivulla.",
+    "currentStreak": "Nykyinen putki",
+    "longestStreak": "Pisin putki",
+    "totalEntries": "Merkintöjä yhteensä",
+    "entriesPerMonth": "Merkinnät kuukausittain",
+    "entries": "merkintää"
+  }
+}
