@@ -1,6 +1,6 @@
 # Gratitude Journal
 
-A personal gratitude journal web app built with Django, React, and TypeScript.
+A personal gratitude journal web app built with Django, React, and TypeScript. Made as a take-home assignment.
 
 Users write a daily entry, browse past entries by month, and view a streak count and activity chart over time.
 
