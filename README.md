@@ -82,6 +82,12 @@ frontend/
   tests/         Playwright end-to-end tests
 ```
 
+## Design decisions
+
+Authentication is intentionally omitted. This is a single-user local app and adding auth would add setup friction without demonstrating anything beyond what a very basic Django tutorial covers.
+
+The frontend is more built out than the backend. Having more existing experience with Django, I felt getting refreshed on React was the more useful focus.
+
 ## API endpoints
 
 | Method | URL | Description |
