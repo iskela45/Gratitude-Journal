@@ -55,13 +55,15 @@ With both servers running, from the `frontend` directory:
 npx playwright test
 ```
 
-Playwright uses the system-installed Chromium and Firefox. On Ubuntu-based distros, install them first:
+On Ubuntu-based distros, install Playwright's managed browsers first:
 
 ```bash
 npx playwright install chromium firefox
 ```
 
-Note: Playwright visual comparison tests can be very flaky due to different devices' hardware and software config causing differences in rendering web pages. Running `npx playwright test --update-snapshots` will generate fresh reference snapshots for use in running tests locally.
+On other distros (Arch, Fedora, etc.), the config automatically uses system-installed browsers. Install them via your package manager if needed.
+
+Note: the tests include visual snapshot comparisons, which can be flaky across different hardware and OS configurations due to rendering differences. Run `npx playwright test --update-snapshots` to generate fresh local baselines on first run.
 
 ## Project structure
 
