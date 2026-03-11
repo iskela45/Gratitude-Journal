@@ -1,4 +1,17 @@
+/// <reference types="node" />
 import { defineConfig, devices } from '@playwright/test';
+import { readFileSync } from 'fs';
+
+function isUbuntuBased(): boolean {
+  try {
+    const content = readFileSync('/etc/os-release', 'utf8');
+    return /^(ID|ID_LIKE)=.*ubuntu/m.test(content);
+  } catch {
+    return false;
+  }
+}
+
+const ubuntuBased = isUbuntuBased();
 
 export default defineConfig({
   testDir: './tests',
@@ -18,12 +31,14 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        ...(ubuntuBased ? {} : { launchOptions: { executablePath: '/usr/bin/chromium' } }),
       },
     },
     {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
+        ...(ubuntuBased ? {} : { channel: 'firefox' }),
       },
     },
   ],
