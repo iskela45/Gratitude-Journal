@@ -61,7 +61,7 @@ On Ubuntu-based distros, install Playwright's managed browsers first:
 npx playwright install chromium firefox
 ```
 
-On other distros (Arch, Fedora, etc.), the config automatically uses system-installed browsers. Install them via your package manager if needed.
+On other distros (Arch, Fedora, etc.), the config attempts to use system-installed Chromium and Firefox. Install both via your package manager before running tests.
 
 Note: the tests include visual snapshot comparisons, which can be flaky across different hardware and OS configurations due to rendering differences. Run `npx playwright test --update-snapshots` to generate fresh local baselines on first run.
 
