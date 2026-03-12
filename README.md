@@ -7,8 +7,7 @@ Users write a daily entry, browse past entries by month, and view a streak count
 ## Tech stack
 
 - **Backend:** Django 6, Django REST Framework, SQLite
-- **Frontend:** React 18, TypeScript, Vite, Recharts
-- **Styling:** CSS Modules
+- **Frontend:** React 18, TypeScript, Vite, Recharts, i18next, Playwright
 
 ## Requirements
 
